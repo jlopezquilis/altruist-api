@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Privacy ###
+application.properties
+application.yml
+*.env
