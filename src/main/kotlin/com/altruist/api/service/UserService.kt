@@ -14,13 +14,13 @@ class UserService(
         val user = userRepository.findByEmail(request.email)
             .orElseThrow { IllegalArgumentException("Usuario no encontrado con el email: ${request.email}") }
 
-        if (user.passwordHash != request.password) {
+        if (user.password_hash != request.password) {
             throw IllegalArgumentException("Contraseña incorrecta.")
         }
 
         return LoginResponse(
             message = "Login correcto",
-            userId = user.idUser,
+            userId = user.id_user,
             name = user.name
         )
     }
