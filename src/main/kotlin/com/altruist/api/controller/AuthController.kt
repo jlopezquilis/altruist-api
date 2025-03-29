@@ -1,7 +1,7 @@
 package com.altruist.api.controller
 
-import com.altruist.api.dto.LoginRequest
-import com.altruist.api.dto.LoginResponse
+import com.altruist.api.dto.auth.LoginRequest
+import com.altruist.api.dto.auth.LoginResponse
 import com.altruist.api.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
