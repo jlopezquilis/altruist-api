@@ -24,9 +24,9 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(kotlin("stdlib-jdk8"))
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.hibernate.validator:hibernate-validator:8.0.1.Final")
+	//implementation("org.hibernate.validator:hibernate-validator:8.0.1.Final")
 
 }
 
