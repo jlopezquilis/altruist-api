@@ -1,4 +1,4 @@
-package com.altruist.api.dto.auth
+package com.altruist.api.dto.user
 
 data class LoginResponse(
     val message: String,
