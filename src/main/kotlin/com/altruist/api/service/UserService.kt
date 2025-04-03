@@ -1,7 +1,9 @@
 package com.altruist.api.service
 
+import com.altruist.api.dto.user.CreateUserRequest
 import com.altruist.api.dto.user.LoginRequest
 import com.altruist.api.dto.user.LoginResponse
+import com.altruist.api.model.User
 import com.altruist.api.repository.UserRepository
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
@@ -57,6 +59,29 @@ class UserService(
         """.trimIndent()
         }
         mailSender.send(message)
+    }
+
+    fun createUser(request: CreateUserRequest): User {
+        val newUser = User(
+            name = request.name,
+            surname = request.surname,
+            username = request.username,
+            gender = request.gender,
+            email = request.email,
+            password_hash = request.password_hash,
+            situation = request.situation,
+            profile_picture_url = request.profile_picture_url,
+            anonymous = request.anonymous
+        )
+        return userRepository.save(newUser)
+    }
+
+    fun existByEmail(email: String): Boolean {
+        return userRepository.existsByEmail(email)
+    }
+
+    fun existByUsername(username: String): Boolean {
+        return userRepository.existsByUsername(username)
     }
 
 
