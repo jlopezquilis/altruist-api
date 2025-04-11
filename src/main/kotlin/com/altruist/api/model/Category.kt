@@ -3,7 +3,7 @@ package com.altruist.api.model
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "Category")
+@Table(name = "category")
 data class Category (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
