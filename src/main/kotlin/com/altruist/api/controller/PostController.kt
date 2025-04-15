@@ -22,4 +22,16 @@ class PostController(
         val postResponse = postService.getPostById(id)
         return ResponseEntity.ok(postResponse)
     }
+
+    @GetMapping("/filter")
+    fun getPostsByFilters(
+        @RequestParam idCategory: Long,
+        @RequestParam latitude: Double,
+        @RequestParam longitude: Double,
+        @RequestParam maxDistanceKm: Double
+    ): ResponseEntity<List<GetPostResponse>> {
+        val posts = postService.getPostsByFilters(idCategory, latitude, longitude, maxDistanceKm)
+        return ResponseEntity.ok(posts)
+    }
+
 }

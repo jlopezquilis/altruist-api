@@ -1,6 +1,6 @@
-package com.altruist.api.dto
+package com.altruist.api.dto.category
 
-data class AllCategoriesResponse(
+data class GetCategoryResponse(
     val id_category: Long,
     val name: String,
     val description: String?,

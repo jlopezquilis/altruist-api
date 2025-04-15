@@ -1,9 +1,7 @@
 package com.altruist.api.controller
 
-import com.altruist.api.dto.AllCategoriesResponse
-import com.altruist.api.repository.CategoryRepository
+import com.altruist.api.dto.category.GetCategoryResponse
 import com.altruist.api.service.CategoryService
-import com.altruist.api.service.UserService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
@@ -20,7 +18,7 @@ class CategoryController(
 
     @GetMapping
     @Operation(summary = "Obtener todas las categorías", description = "Devuelve la lista completa de categorías disponibles")
-    fun getAllCategories(): ResponseEntity<List<AllCategoriesResponse>> {
+    fun getAllCategories(): ResponseEntity<List<GetCategoryResponse>> {
         val categories = categoryService.getAllCategories()
         return ResponseEntity.ok(categories)
     }

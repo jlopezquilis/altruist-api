@@ -1,9 +1,7 @@
 package com.altruist.api.service
 
-import com.altruist.api.dto.AllCategoriesResponse
+import com.altruist.api.dto.category.GetCategoryResponse
 import com.altruist.api.repository.CategoryRepository
-import com.altruist.api.repository.UserRepository
-import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 
 
@@ -12,7 +10,7 @@ class CategoryService(
     private val categoryRepository: CategoryRepository
 ) {
 
-    fun getAllCategories(): List<AllCategoriesResponse> {
+    fun getAllCategories(): List<GetCategoryResponse> {
         val categories = categoryRepository.findAll()
 
         if (categories.isEmpty()) {
@@ -20,7 +18,7 @@ class CategoryService(
         }
 
         return categories.map {
-            AllCategoriesResponse(
+            GetCategoryResponse(
                 id_category = it.id_category,
                 name = it.name,
                 description = it.description,
