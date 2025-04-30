@@ -28,7 +28,7 @@ class RequestController(
             .orElseGet { ResponseEntity.notFound().build() }
     }
 
-    @PostMapping
+    @PostMapping("/createRequest")
     fun createRequest(@RequestBody dto: CreateSimplifiedRequestRequest): ResponseEntity<Request> {
         val created = requestService.createRequest(dto)
         return ResponseEntity.ok(created)

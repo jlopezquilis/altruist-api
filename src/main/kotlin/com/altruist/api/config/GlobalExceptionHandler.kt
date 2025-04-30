@@ -14,6 +14,12 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body)
     }
 
+    @ExceptionHandler(IllegalStateException::class)
+    fun handleIllegalArgument(ex: IllegalStateException): ResponseEntity<Map<String, String?>> {
+        val body = mapOf("message" to ex.message)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body)
+    }
+
     // Puedes añadir más handlers si lo necesitas, por ejemplo:
     @ExceptionHandler(Exception::class)
     fun handleGeneralError(ex: Exception): ResponseEntity<Map<String, String>> {

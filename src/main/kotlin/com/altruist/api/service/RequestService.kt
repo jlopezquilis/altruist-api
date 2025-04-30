@@ -18,25 +18,32 @@ class RequestService(
 ) {
 
     fun createRequest(dto: CreateSimplifiedRequestRequest): Request {
+        val id = RequestId(dto.id_user, dto.id_post)
+
+        if (requestRepository.existsById(id)) {
+            throw IllegalStateException("Ya has solicitado este post")
+        }
+
         val user = userRepository.findById(dto.id_user)
-            .orElseThrow { IllegalArgumentException("User not found") }
+            .orElseThrow { IllegalArgumentException("Usuario no encontrado") }
 
         val post = postRepository.findById(dto.id_post)
-            .orElseThrow { IllegalArgumentException("Post not found") }
+            .orElseThrow { IllegalArgumentException("Post no encontrado") }
 
         val request = Request(
-            id = RequestId(dto.id_user, dto.id_post),
+            id = id,
             user = user,
             post = post,
-            title = null,
+            title = "",
             body = null,
             image = null,
-            status = "pendiente",
+            status = dto.status,
             dateCreated = LocalDateTime.now()
         )
 
         return requestRepository.save(request)
     }
+
 
     fun getRequestById(id: RequestId): Optional<Request> {
         return requestRepository.findById(id)
