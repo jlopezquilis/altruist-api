@@ -1,5 +1,6 @@
 package com.altruist.api.controller
 
+import com.altruist.api.dto.request.CreateSimplifiedRequestRequest
 import com.altruist.api.model.request.Request
 import com.altruist.api.model.request.RequestId
 import com.altruist.api.service.RequestService
@@ -16,13 +17,6 @@ class RequestController(
     private val requestService: RequestService
 ) {
 
-    @PostMapping
-    @Operation(summary = "Crear una solicitud", description = "Crea una nueva solicitud de donación")
-    fun createRequest(@RequestBody request: Request): ResponseEntity<Request> {
-        val created = requestService.createRequest(request)
-        return ResponseEntity.ok(created)
-    }
-
     @GetMapping("/{idUser}/{idPost}")
     @Operation(summary = "Obtener una solicitud por ID", description = "Obtiene una solicitud de donación por su ID")
     fun getRequestByUserAndPost(
@@ -32,6 +26,12 @@ class RequestController(
         val request = requestService.getRequestByUserAndPost(idUser, idPost)
         return request.map { ResponseEntity.ok(it) }
             .orElseGet { ResponseEntity.notFound().build() }
+    }
+
+    @PostMapping
+    fun createRequest(@RequestBody dto: CreateSimplifiedRequestRequest): ResponseEntity<Request> {
+        val created = requestService.createRequest(dto)
+        return ResponseEntity.ok(created)
     }
 
     @GetMapping("/user/{idUser}")

@@ -23,8 +23,8 @@ data class Request(
     @JoinColumn(name = "id_post", nullable = false)
     val post: Post = Post(),
 
-    @Column(nullable = false, length = 255)
-    val title: String = "",
+    @Column(length = 255)
+    val title: String? = null,
 
     @Column(columnDefinition = "TEXT")
     val body: String? = null,
