@@ -17,7 +17,7 @@ class RequestService(
     private val postRepository: PostRepository
 ) {
 
-    fun createRequest(dto: CreateSimplifiedRequestRequest): Request {
+    fun createRequest(dto: CreateSimplifiedRequestRequest): Boolean {
         val id = RequestId(dto.id_user, dto.id_post)
 
         if (requestRepository.existsById(id)) {
@@ -41,7 +41,9 @@ class RequestService(
             dateCreated = LocalDateTime.now()
         )
 
-        return requestRepository.save(request)
+        requestRepository.save(request)
+
+        return true
     }
 
 

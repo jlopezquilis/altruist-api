@@ -29,7 +29,7 @@ class RequestController(
     }
 
     @PostMapping("/createRequest")
-    fun createRequest(@RequestBody dto: CreateSimplifiedRequestRequest): ResponseEntity<Request> {
+    fun createRequest(@RequestBody dto: CreateSimplifiedRequestRequest): ResponseEntity<Boolean> {
         val created = requestService.createRequest(dto)
         return ResponseEntity.ok(created)
     }
