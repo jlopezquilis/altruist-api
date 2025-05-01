@@ -49,6 +49,15 @@ class PostService(
         return savedPost.id_post
     }
 
+    @Transactional
+    fun deletePostById(id: Long) {
+        val post = postRepository.findById(id)
+            .orElseThrow { RuntimeException("Post no encontrado") }
+
+        postRepository.delete(post)
+    }
+
+
     @Transactional(readOnly = true)
     fun getPostById(id: Long): GetPostResponse {
         val post = postRepository.findById(id)
