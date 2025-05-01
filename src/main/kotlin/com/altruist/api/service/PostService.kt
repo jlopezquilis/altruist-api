@@ -70,7 +70,7 @@ class PostService(
                 icon_url = post.category.icon_url
             ),
             user = GetUserResponse(
-                id_user = post.user!!.id_user,
+                id_user = post.user!!.idUser,
                 name = post.user.name,
                 surname = post.user.surname,
                 username = post.user.username,
@@ -147,7 +147,7 @@ class PostService(
                         icon_url = post.category.icon_url
                     ),
                     user = GetUserResponse(
-                        id_user = post.user!!.id_user,
+                        id_user = post.user!!.idUser,
                         name = post.user.name,
                         surname = post.user.surname,
                         username = post.user.username,
@@ -163,5 +163,47 @@ class PostService(
                 )
             }
     }
+
+    @Transactional(readOnly = true)
+    fun getPostsByUser(idUser: Long): List<GetPostResponse> {
+        val user = userRepository.findById(idUser)
+            .orElseThrow { RuntimeException("Usuario no encontrado") }
+
+        val posts = postRepository.findAllByUser_IdUser(idUser)
+
+        return posts.map { post ->
+            GetPostResponse(
+                id_post = post.id_post,
+                title = post.title,
+                description = post.description,
+                status = post.status,
+                quality = post.quality,
+                latitude = post.latitude,
+                longitude = post.longitude,
+                date_created = post.date_created,
+                category = GetCategoryResponse(
+                    id_category = post.category!!.id_category,
+                    name = post.category.name,
+                    description = post.category.description,
+                    icon_url = post.category.icon_url
+                ),
+                user = GetUserResponse(
+                    id_user = user.idUser,
+                    name = user.name,
+                    surname = user.surname,
+                    username = user.username,
+                    gender = user.gender,
+                    email = user.email,
+                    password_hash = user.password_hash,
+                    situation = user.situation,
+                    profile_picture_url = user.profile_picture_url,
+                    anonymous = user.anonymous
+                ),
+                imageUrls = post.images.map { it.url },
+                distanceFromFilter = 0.0
+            )
+        }
+    }
+
 
 }

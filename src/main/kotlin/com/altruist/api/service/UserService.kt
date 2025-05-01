@@ -25,7 +25,7 @@ class UserService(
 
         return LoginResponse(
             message = "Login correcto",
-            id_user = user.id_user,
+            id_user = user.idUser,
             name = user.name,
             surname = user.surname ?: "",
             username = user.username,

@@ -8,7 +8,8 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
-    val id_user: Long = 0,
+    val idUser: Long = 0,
+    //TODO: Modificar todas las entidades JPA para evitar underscores.
 
     @Column(nullable = false)
     val name: String = "",

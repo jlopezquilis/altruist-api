@@ -34,4 +34,11 @@ class PostController(
         return ResponseEntity.ok(posts)
     }
 
+    @GetMapping("/byUser/{idUser}")
+    fun getPostsByUser(@PathVariable idUser: Long): ResponseEntity<List<GetPostResponse>> {
+        val posts = postService.getPostsByUser(idUser)
+        return ResponseEntity.ok(posts)
+    }
+
+
 }

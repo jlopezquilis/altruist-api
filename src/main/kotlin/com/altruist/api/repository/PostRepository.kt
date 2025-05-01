@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PostRepository : JpaRepository<Post, Long> {
+    fun findAllByUser_IdUser(idUser: Long): List<Post>
 }
