@@ -57,4 +57,14 @@ class UserController(
         return ResponseEntity.ok(savedUser)
     }
 
+    @GetMapping("/{id}")
+    fun getUserById(@PathVariable id: Long): ResponseEntity<User> {
+        return try {
+            val user = userService.getUserById(id)
+            ResponseEntity.ok(user)
+        } catch (e: NoSuchElementException) {
+            ResponseEntity.notFound().build()
+        }
+    }
+
 }

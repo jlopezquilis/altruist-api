@@ -40,7 +40,7 @@ class UserService(
 
     fun sendVerificationCode(toEmail: String, code: String) {
         val message = SimpleMailMessage().apply {
-            setFrom("Altruist <altruist.noreply@gmail.com>") // 👈 Nombre + correo
+            setFrom("Altruist <altruist.noreply@gmail.com>")
             setTo(toEmail)
             subject = "Código de verificación para completar tu registro en Altruist"
             text = """
@@ -74,6 +74,11 @@ class UserService(
             anonymous = request.anonymous
         )
         return userRepository.save(newUser)
+    }
+
+    fun getUserById(id: Long): User {
+        return userRepository.findById(id)
+            .orElseThrow { NoSuchElementException("Usuario no encontrado con el id: $id") }
     }
 
     fun existByEmail(email: String): Boolean {

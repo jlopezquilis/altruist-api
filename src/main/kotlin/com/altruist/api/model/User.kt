@@ -1,5 +1,6 @@
 package com.altruist.api.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
 
 @Entity
@@ -8,6 +9,7 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
+    @JsonProperty("id_user")
     val idUser: Long = 0,
     //TODO: Modificar todas las entidades JPA para evitar underscores.
 
